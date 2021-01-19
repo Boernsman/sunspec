@@ -505,12 +505,12 @@ int suns_init_modbus(suns_app_t *app)
 
     /* set timeout */
     debug("app->timeout = %d", app->timeout);
-    timeout.tv_sec = app->timeout / 1000;
-    timeout.tv_usec = (app->timeout % 1000) * 1000;
-    modbus_set_response_timeout(app->mb_ctx, &timeout);
+    uint32_t tv_sec = app->timeout / 1000;
+    uint32_t tv_usec = (app->timeout % 1000) * 1000;
+    modbus_set_response_timeout(app->mb_ctx, tv_sec, tv_usec);
 
-    debug("timeout.tv_sec = %d", (int) timeout.tv_sec);
-    debug("timeout.tv_usec = %d", (int) timeout.tv_usec);
+    debug("timeout.tv_sec = %d", tv_sec);
+    debug("timeout.tv_usec = %d", tv_usec);
 
     return 0;
 }
